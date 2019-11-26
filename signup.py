@@ -21,12 +21,15 @@ def callback_customer(data):
                 "To": [
                     {
                         "Email": data['email'],
-                        "Name": data['first_name']
+                        "firstname": data['first_name']
                     }
                 ],
-                "Subject": "Bienvenue chez BWI.",
-                "HTMLPart": "<h3>Bienvenue dans la hive !</h3><br/>May the "
-                            "force bee with you!"
+                "TemplateID": 1106753,
+                "TemplateLanguage": True,
+                "Subject": "Bienvenue dans la Hive",
+                "Variables": {
+                    "firstname": data['first_name']
+                }
             }
         ]
     }
@@ -43,5 +46,8 @@ def callback_customer(data):
 
 
 if __name__ == '__main__':
-    callback_customer(
-        '{"email": "antoine@visiblee.io", "first_name": "Antoine"}')
+    # callback_customer('{"email": "antoine@visiblee.io", "first_name": "Antoine"}')
+    callback_customer('{"email": "aroumo_v@etna-alternance.net", "first_name": "Vinod"}')
+    callback_customer('{"email": "derouc_c@etna-alternance.net", "first_name": "Clovis"}')
+    callback_customer('{"email": "rollan_t@etna-alternance.net", "first_name": "Thomas"}')
+    callback_customer('{"email": "massar_t@etna-alternance.net", "first_name": "Théo"}')
