@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import json
 import os
+import time
 
 import bwi
 from mailjet_rest import Client
@@ -9,6 +10,7 @@ ALERT_EMAIL = "contact@bwi-project.com"
 
 
 def callback_customer(data):
+    t = time.process_time()
     data = (json.loads(data))
     api_key = os.environ.get('MAILJET_APIKEY')
     api_secret = os.environ.get('MAILJET_APISECRET')
@@ -40,9 +42,13 @@ def callback_customer(data):
     if 200 <= result.status_code <= 299:
         bwi.logs.info("Alert signup email has been sent to " + ALERT_EMAIL)
         bwi.metrics.store("sent_email", 1)
+        bwi.metrics.counter("alert_signup", 1)
     else:
         bwi.logs.error("Alert signup email has not been sent to " + ALERT_EMAIL)
         bwi.metrics.store("error_email", 1)
+        bwi.metrics.counter("fail_alert_signup", 1)
+    elapsed_time = time.process_time() - t
+    bwi.metrics.value("alert_signup_time", elapsed_time)
 
     return data
 
