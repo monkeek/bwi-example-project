@@ -48,7 +48,7 @@ def callback_customer(data):
         bwi.metrics.store("error_email", 1)
         bwi.metrics.counter("fail_alert_signup", 1)
     elapsed_time = time.process_time() - t
-    bwi.metrics.value("alert_signup_time", elapsed_time)
+    bwi.metrics.store("alert_signup_time", elapsed_time)
 
     return data
 

@@ -44,7 +44,7 @@ def callback_customer(data):
         bwi.logs.error("Signup email has not been sent to " + data['email'])
         bwi.metrics.store("error_signup_email", 1)
     elapsed_time = time.process_time() - t
-    bwi.metrics.value("signup_time", elapsed_time)
+    bwi.metrics.store("signup_time", elapsed_time)
 
     return data
 

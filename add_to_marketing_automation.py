@@ -33,7 +33,7 @@ def callback_customer(data):
         bwi.logs.error(data['email'] + " can't be added to the list : " + result)
         bwi.metrics.counter("fail_add_to_ma", 1)
     elapsed_time = time.process_time() - t
-    bwi.metrics.value("add_to_ma_time", elapsed_time)
+    bwi.metrics.store("add_to_ma_time", elapsed_time)
 
     return data
 
