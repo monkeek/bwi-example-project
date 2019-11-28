@@ -34,8 +34,7 @@ def callback_customer(data):
         bwi.metrics.counter("fail_add_to_ma", 1)
     elapsed_time = time.process_time() - t
     bwi.metrics.store("add_to_ma_time", elapsed_time)
-
-    return data
+    return json.dumps(data)
 
 
 if __name__ == '__main__':

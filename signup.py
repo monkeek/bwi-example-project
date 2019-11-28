@@ -46,7 +46,7 @@ def callback_customer(data):
     elapsed_time = time.process_time() - t
     bwi.metrics.store("signup_time", elapsed_time)
 
-    return data
+    return json.dumps(data)
 
 
 if __name__ == '__main__':
