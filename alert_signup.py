@@ -20,7 +20,7 @@ def callback_customer(data):
             {
                 "From": {
                     "Email": "contact@bwi-project.com",
-                    "Name": "UN DES SERVEURS D'UN DES CLUSTERS DE BWI"
+                    "Name": "BWI - Signup notifications"
                 },
                 "To": [
                     {
