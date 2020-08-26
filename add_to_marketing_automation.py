@@ -1,4 +1,5 @@
 #!/usr/bin/python
+NEXT_BEE = 'result'
 import json
 import os
 import time
