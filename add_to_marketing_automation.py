@@ -3,14 +3,15 @@ NEXT_BEE = 'alert_signup'
 import json
 import os
 import time
-
 import bwi
 from mailjet_rest import Client
 
 
 def callback_customer(data):
     t = time.process_time()
+    print(data)
     data = json.loads(data)
+    print(data)
     api_key = os.environ.get('MAILJET_APIKEY')
     api_secret = os.environ.get('MAILJET_APISECRET')
     mailjet = Client(auth=(api_key, api_secret), version='v3')
@@ -26,12 +27,12 @@ def callback_customer(data):
     listid = os.environ.get('MAILJET_MA_LIST')
     result = mailjet.contactslist_managemanycontacts.create(data=mjdata,
                                                             id=listid)
-    bwi.logs.info("Adding " + data['email'] + " to the list id=" + listid)
+    bwi.logs.info("Adding " + str(data['email']) + " to the list id=" + listid)
     if 200 <= result.status_code <= 299:
-        bwi.logs.info(data['email'] + " has been added to the list")
+        bwi.logs.info(str(data['email']) + " has been added to the list")
         bwi.metrics.counter("add_to_ma", 1)
     else:
-        bwi.logs.error(data['email'] + " can't be added to the list : " + result)
+        bwi.logs.error(str(data['email']) + " can't be added to the list : " + result)
         bwi.metrics.counter("fail_add_to_ma", 1)
     elapsed_time = time.process_time() - t
     bwi.metrics.store("add_to_ma_time", elapsed_time)
