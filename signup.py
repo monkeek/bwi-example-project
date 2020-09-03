@@ -1,4 +1,5 @@
 #!/usr/bin/python
+START_BEE = True
 NEXT_BEE = 'add_to_marketing_automation'
 import json
 import os
