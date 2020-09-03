@@ -1,5 +1,5 @@
 #!/usr/bin/python
-NEXT_BEE = 'result'
+NEXT_BEE = 'alert_signup'
 import json
 import os
 import time
