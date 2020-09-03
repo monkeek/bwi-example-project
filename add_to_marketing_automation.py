@@ -29,8 +29,6 @@ def callback_customer(data):
                                                             id=listid)
     print(data)
     print(data['email'])
-    print(data.email)
-
     bwi.logs.info("Adding " + str(data['email']) + " to the list id=" + listid)
     if 200 <= result.status_code <= 299:
         bwi.logs.info(str(data['email']) + " has been added to the list")
