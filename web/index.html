@@ -794,6 +794,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="agileits-top">
             <form action="{{BWI_HIVE_ENTRYPOINT_SYNC}}" id="formulaire"
                   method="post">
+                URL : {{BWI_ENTRYPOINT_URL_SYNC}}
                 <input class="text" type="text" name="name" placeholder="Prénom" required="">
                 <input class="text email" type="email" name="email" placeholder="Email" required="">
                 <div class="wthree-text">
@@ -846,7 +847,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             data: JSON.stringify(data), // serializes the form's elements.
             success: function (data) {
                 console.log(JSON.parse(data.result));
-                alert(JSON.parse(data.result)); // show response from the php script.
+                alert(JSON.parse(data.result)['status']); // show response from the php script.
             }
         });
 
