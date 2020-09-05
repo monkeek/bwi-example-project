@@ -1,12 +1,14 @@
 #!/usr/bin/python
-START_BEE = True
-NEXT_BEE = 'add_to_marketing_automation'
 import json
 import os
 import time
 
 import bwi
 from mailjet_rest import Client
+
+
+START_BEE = True
+NEXT_BEE = 'add_to_marketing_automation'
 
 
 def callback_customer(data):

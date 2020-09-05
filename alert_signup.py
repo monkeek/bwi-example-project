@@ -1,11 +1,13 @@
 #!/usr/bin/python
-NEXT_BEE = 'result'
 import json
 import os
 import time
 
 import bwi
 from mailjet_rest import Client
+
+
+NEXT_BEE = 'result'
 
 ALERT_EMAIL = "contact@bwi-project.com"
 

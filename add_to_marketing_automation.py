@@ -1,10 +1,13 @@
 #!/usr/bin/python
-NEXT_BEE = 'alert_signup'
 import json
 import os
 import time
+
 import bwi
 from mailjet_rest import Client
+
+
+NEXT_BEE = 'alert_signup'
 
 
 def callback_customer(data):
