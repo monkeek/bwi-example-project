@@ -32,14 +32,14 @@ def callback_customer(data):
                                                             id=listid)
     print(data)
     print(data['email'])
-    bwi.logs.info("Adding " + str(data['email']) + " to the list id=" + listid)
+    bwi.logs.info("Adding " + str(data['email']) + " to the list id=" + str(listid))
     if 200 <= result.status_code <= 299:
         data['status'] = "SUCCESS"
         bwi.logs.info(str(data['email']) + " has been added to the list")
         bwi.metrics.counter("add_to_ma", 1)
     else:
         data['status'] = "FAIL"
-        bwi.logs.error(str(data['email']) + " can't be added to the list : " + result)
+        bwi.logs.error(str(data['email']) + " can't be added to the list : " + str(result))
         bwi.metrics.counter("fail_add_to_ma", 1)
     elapsed_time = time.process_time() - t
     bwi.metrics.store("add_to_ma_time", elapsed_time)
