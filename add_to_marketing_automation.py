@@ -30,9 +30,7 @@ def callback_customer(data):
     listid = os.environ.get('MAILJET_MA_LIST')
     result = mailjet.contactslist_managemanycontacts.create(data=mjdata,
                                                             id=listid)
-    print(data)
-    print(data['email'])
-    bwi.logs.info("Adding " + str(data['email']) + " to the list id=" + str(listid))
+    bwi.logs.info("Adding " + str(data['email']) + " to the list id=" + str(listid)+", status code=" + str(result.status_code) +", result" + str(json.dumps(result.body)))
     if 200 <= result.status_code <= 299:
         data['status'] = "SUCCESS"
         bwi.logs.info(str(data['email']) + " has been added to the list")
