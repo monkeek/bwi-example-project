@@ -831,7 +831,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script>
     $("#formulaire").submit(function (e) {
 
-        e.preventDefault(); // avoid to execute the actual submit of the form.
+        e.preventDefault();
 
         var form = $(this);
         var url = form.attr('action');
@@ -844,10 +844,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             url: url,
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(data), // serializes the form's elements.
+            data: JSON.stringify(data),
             success: function (data) {
                 console.log(JSON.parse(data.result));
-                alert(JSON.parse(data.result)['status']); // show response from the php script.
+                alert(JSON.parse(data.result)['register_status']);
             }
         });
 
