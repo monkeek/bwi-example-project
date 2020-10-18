@@ -9,10 +9,11 @@ from mailjet_rest import Client
 
 NEXT_BEE = 'result'
 
-ALERT_EMAIL = "contact@bwi-project.com"
-
+ALERT_EMAIL = os.environ.get('CUSTOMER_SUCCESS_MAIL')
 
 def callback_customer(data):
+    if data['register_status'] != "SUCCESS":
+        return data
     t = time.process_time()
     data = (json.loads(data))
     api_key = os.environ.get('MAILJET_APIKEY')
@@ -43,10 +44,12 @@ def callback_customer(data):
     result = mailjet.send.create(data=mjdata)
     bwi.logs.info("Sending alert signup email to " + ALERT_EMAIL)
     if 200 <= result.status_code <= 299:
+        data['register_status'] = "SUCCESS"
         bwi.logs.info("Alert signup email has been sent to " + ALERT_EMAIL)
         bwi.metrics.store("sent_email", 1)
         bwi.metrics.counter("alert_signup", 1)
     else:
+        data['register_status'] = "ERROR_ALERT"
         bwi.logs.error("Alert signup email has not been sent to " + ALERT_EMAIL)
         bwi.metrics.store("error_email", 1)
         bwi.metrics.counter("fail_alert_signup", 1)

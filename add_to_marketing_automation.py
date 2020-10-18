@@ -11,6 +11,8 @@ NEXT_BEE = 'alert_signup'
 
 
 def callback_customer(data):
+    if data['register_status'] != "SUCCESS":
+        return data
     t = time.process_time()
     print(data)
     data = json.loads(data)
@@ -36,7 +38,7 @@ def callback_customer(data):
         bwi.logs.info(str(data['email']) + " has been added to the list")
         bwi.metrics.counter("add_to_ma", 1)
     else:
-        data['register_status'] = "FAIL"
+        data['register_status'] = "ERROR_MARKETING_AUTOMATION"
         bwi.logs.error(str(data['email']) + " can't be added to the list : " + str(result))
         bwi.metrics.counter("fail_add_to_ma", 1)
     elapsed_time = time.process_time() - t

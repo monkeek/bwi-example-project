@@ -2,10 +2,8 @@
 import json
 import os
 import time
-
 import bwi
 from mailjet_rest import Client
-
 
 START_BEE = True
 NEXT_BEE = 'add_to_marketing_automation'
@@ -42,9 +40,11 @@ def callback_customer(data):
     result = mailjet.send.create(data=mjdata)
     bwi.logs.info("Sending signup email to " + data['email'])
     if 200 <= result.status_code <= 299:
+        data['register_status'] = "SUCCESS"
         bwi.logs.info("Signup email has been sent to " + data['email'])
         bwi.metrics.counter("sent_signup_email", 1)
     else:
+        data['register_status'] = "ERROR_SIGNUP"
         bwi.logs.error("Signup email has not been sent to " + data['email'])
         bwi.metrics.store("error_signup_email", 1)
     elapsed_time = time.process_time() - t
