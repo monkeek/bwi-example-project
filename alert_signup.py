@@ -12,10 +12,10 @@ NEXT_BEE = 'result'
 ALERT_EMAIL = os.environ.get('CUSTOMER_SUCCESS_MAIL')
 
 def callback_customer(data):
-    if data['register_status'] != "SUCCESS":
-        return data
     t = time.process_time()
     data = (json.loads(data))
+    if data['register_status'] != "SUCCESS":
+        return data
     api_key = os.environ.get('MAILJET_APIKEY')
     api_secret = os.environ.get('MAILJET_APISECRET')
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
