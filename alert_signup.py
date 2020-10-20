@@ -28,7 +28,7 @@ def callback_customer(data):
                 },
                 "To": [
                     {
-                        "Email": ALERT_EMAIL
+                        "Email": str(ALERT_EMAIL)
                     }
                 ],
                 "TemplateID": 1107138,
@@ -42,15 +42,15 @@ def callback_customer(data):
         ]
     }
     result = mailjet.send.create(data=mjdata)
-    bwi.logs.info("Sending alert signup email to " + ALERT_EMAIL)
+    bwi.logs.info("Sending alert signup email to " + str(ALERT_EMAIL))
     if 200 <= result.status_code <= 299:
         data['register_status'] = "SUCCESS"
-        bwi.logs.info("Alert signup email has been sent to " + ALERT_EMAIL)
+        bwi.logs.info("Alert signup email has been sent to " + str(ALERT_EMAIL))
         bwi.metrics.store("sent_email", 1)
         bwi.metrics.counter("alert_signup", 1)
     else:
         data['register_status'] = "ERROR_ALERT"
-        bwi.logs.error("Alert signup email has not been sent to " + ALERT_EMAIL)
+        bwi.logs.error("Alert signup email has not been sent to " + str(ALERT_EMAIL))
         bwi.metrics.store("error_email", 1)
         bwi.metrics.counter("fail_alert_signup", 1)
     elapsed_time = time.process_time() - t
