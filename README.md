@@ -1,6 +1,6 @@
 # Bwi Example Project
 
-_Basic marketing automation._
+_Basic marketing automation using [bwi-project.com](https://bwi-project.com)._
 
 ## Presentation
 
